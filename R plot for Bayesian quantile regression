@@ -15,7 +15,7 @@ plot1 + geom_hline(aes(yintercept=GP[1,1])) +
   theme(axis.line=element_line(colour="black"),
   panel.grid.major=element_blank(),plot.title=element_text(size=15,face="bold"),
   axis.title.x=element_text(size=15),axis.title.y=element_text(size=15)) + 
-  ylab("Nilai Parameter") + xlab("Kuantil") + ggtitle("Pintasan")
+  ylab("Estimated Coefficients") + xlab("Quantiles") + ggtitle("Intercept")
 
 ## Alternatively, just type the parameter values for GP
 

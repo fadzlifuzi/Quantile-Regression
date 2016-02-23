@@ -1,0 +1,29 @@
+## Plot quantile regression data without smoothing,with errorbars using ggplot2 ##
+## Data must be in a dataframe format ##
+## In the immediate example, the dataframe is called "Int", which consists of 4 columns (Quantile, Mean, LB, UB) and 
+## rows represent selected quantiles for intercept values of all quantiles.
+## "GP" is a dataframe consists of parameter values of Generalized Poisson regression model. For instance, GP[1,1] means the
+## value of Intercept, GP[1,3] the value of Lower Bound(LB) & GP[1,4] the value of Upper Bound (UB). These are needed to draw 
+## horizontal lines representing GP estimates(mean and credible interval). 
+
+plot1 <- ggplot(Int,aes(x=Quantiles,y=Mean)) + geom_point() + 
+  geom_errorbar(aes(ymin=LB,ymax=UB),width=.01) 
+plot1 + geom_hline(aes(yintercept=GP[1,1])) +
+  geom_hline(aes(yintercept=GP[1,3]),linetype="dashed") +
+  geom_hline(aes(yintercept=GP[1,4]),linetype="dashed") +
+  scale_x_continuous(breaks=seq(min(0.10),max(0.90),by=0.10)) + 
+  theme(axis.line=element_line(colour="black"),
+  panel.grid.major=element_blank(),plot.title=element_text(size=15,face="bold"),
+  axis.title.x=element_text(size=15),axis.title.y=element_text(size=15)) + 
+  ylab("Nilai Parameter") + xlab("Kuantil") + ggtitle("Pintasan")
+
+## Alternatively, just type the parameter values for GP
+
+plot1 + geom_hline(aes(yintercept=0.51566)) + 
+  geom_hline(aes(yintercept=0.49036),linetype="dashed") + 
+  geom_hline(aes(yintercept=0.54097),linetype="dashed") + 
+  scale_x_continuous(breaks=seq(min(0.10),max(0.90),by=0.10)) + 
+  theme(axis.line=element_line(colour="black"),
+  panel.grid.major=element_blank(),plot.title=element_text(size=15,face="bold"),
+  axis.title.x=element_text(size=15),axis.title.y=element_text(size=15)) + 
+  ylab("Estimated Coefficients") + xlab("Quantiles") + ggtitle("2-3 years")
